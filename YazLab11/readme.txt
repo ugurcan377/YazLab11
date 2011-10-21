@@ -1,1 +1,2 @@
 Iletisim denemesi
+Anlasildi tamam
