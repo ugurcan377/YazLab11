@@ -410,7 +410,7 @@
             this.Controls.Add(this.radioButtonEbook);
             this.Controls.Add(this.radioButtonBook);
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Referans Ekle";
             this.Load += new System.EventHandler(this.radioButtonBook_CheckedChanged);
             this.ResumeLayout(false);
             this.PerformLayout();

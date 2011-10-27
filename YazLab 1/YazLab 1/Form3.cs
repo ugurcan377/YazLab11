@@ -23,7 +23,7 @@ namespace YazLab_1
             {
                 MessageBox.Show("XML dosyası bulunamadı. Tekrar Oluşturuyor.","Hata");
                 XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
-                XmlElement root = doc.CreateElement("Resources");
+                XmlElement root = doc.CreateElement("Referanslar");
                 doc.AppendChild(declaration);
                 doc.AppendChild(root);
                 doc.Save(PATH);
@@ -119,27 +119,27 @@ namespace YazLab_1
         {
             doc.Load(PATH);
             XmlElement root = doc.DocumentElement;
-            XmlElement refe = doc.CreateElement("Referance");
+            XmlElement refe = doc.CreateElement("Referans");
             XmlElement id   = doc.CreateElement("ID");
-            XmlElement type = doc.CreateElement("Type");
-            XmlElement auth = doc.CreateElement("Author");
-            XmlElement year = doc.CreateElement("Year");
-            XmlElement name = doc.CreateElement("Name");
-            XmlElement city = doc.CreateElement("City");
-            XmlElement pub = doc.CreateElement("Publisher");
-            XmlElement edi = doc.CreateElement("Editors");
-            XmlElement sname = doc.CreateElement("SourceName");
-            XmlElement vol = doc.CreateElement("Volume");
-            XmlElement pgnum = doc.CreateElement("PageNumber");
+            XmlElement type = doc.CreateElement("Tip");
+            XmlElement auth = doc.CreateElement("Yazar");
+            XmlElement year = doc.CreateElement("Yil");
+            XmlElement name = doc.CreateElement("Baslik");
+            XmlElement city = doc.CreateElement("Sehir");
+            XmlElement pub = doc.CreateElement("Yayinci");
+            XmlElement edi = doc.CreateElement("Editor");
+            XmlElement sname = doc.CreateElement("KaynakAdi");
+            XmlElement vol = doc.CreateElement("Cilt");
+            XmlElement pgnum = doc.CreateElement("SayfaNo");
             XmlElement url = doc.CreateElement("Url");
-            XmlElement date = doc.CreateElement("UrlDate");
-            XmlElement rfile = doc.CreateElement("ResourceFile");
-            XmlElement tag = doc.CreateElement("Tag");
-            XmlElement desc = doc.CreateElement("Description");
-            id.InnerText= (root.GetElementsByTagName("Referance").Count+1).ToString();
+            XmlElement date = doc.CreateElement("UrlTarih");
+            XmlElement rfile = doc.CreateElement("KaynakDosya");
+            XmlElement tag = doc.CreateElement("Etiket");
+            XmlElement desc = doc.CreateElement("Aciklama");
+            id.InnerText= (root.GetElementsByTagName("Referans").Count+1).ToString();
             if (radioButtonBook.Checked)
             {
-                type.InnerText = "Book";
+                type.InnerText = "Kitap";
                 auth.InnerText = textBoxName.Text;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
@@ -170,7 +170,7 @@ namespace YazLab_1
             }
             else if (radioButtonEbook.Checked)
             {
-                type.InnerText = "Ed. Book";
+                type.InnerText = "Ed. Kitap";
                 auth.InnerText = textBoxName.Text;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
@@ -206,7 +206,7 @@ namespace YazLab_1
             }
             else if (radioButtonMagazine.Checked)
             {
-                type.InnerText = "Magazine";
+                type.InnerText = "Dergi";
                 auth.InnerText = textBoxName.Text;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
@@ -241,7 +241,7 @@ namespace YazLab_1
                 }
             else if (radioButtonNet.Checked)
             {
-                type.InnerText = "Internet Referance";
+                type.InnerText = "Internet Kaynagi";
                 auth.InnerText = textBoxName.Text;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
