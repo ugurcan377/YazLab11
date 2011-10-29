@@ -100,9 +100,12 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Ara";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listView1
             // 
+            this.listView1.CheckBoxes = true;
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(1, 71);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(911, 451);
@@ -118,6 +121,7 @@
             this.button2.TabIndex = 8;
             this.button2.Text = "Güncelle";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -127,6 +131,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "Sepete Ekle";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -136,6 +141,7 @@
             this.button4.TabIndex = 10;
             this.button4.Text = "Sepeti Göster";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form4
             // 

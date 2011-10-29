@@ -129,11 +129,11 @@ namespace YazLab_1
             XmlElement pub = doc.CreateElement("Yayinci");
             XmlElement edi = doc.CreateElement("Editor");
             XmlElement sname = doc.CreateElement("KaynakAdi");
-            XmlElement vol = doc.CreateElement("Cilt");
+            XmlElement vol = doc.CreateElement("CiltNo");
             XmlElement pgnum = doc.CreateElement("SayfaNo");
             XmlElement url = doc.CreateElement("Url");
             XmlElement date = doc.CreateElement("UrlTarih");
-            XmlElement rfile = doc.CreateElement("KaynakDosya");
+            XmlElement rfile = doc.CreateElement("DosyaYolu");
             XmlElement tag = doc.CreateElement("Etiket");
             XmlElement desc = doc.CreateElement("Aciklama");
             id.InnerText= (root.GetElementsByTagName("Referans").Count+1).ToString();
@@ -145,13 +145,25 @@ namespace YazLab_1
                 name.InnerText = textBoxVar1.Text;
                 city.InnerText = textBoxVar2.Text;
                 pub.InnerText = textBoxVar4.Text;
+                edi.InnerText = String.Empty;
+                sname.InnerText = String.Empty;
+                pgnum.InnerText = String.Empty;
+                vol.InnerText = String.Empty;
+                date.InnerText = String.Empty;
+                url.InnerText = String.Empty;
                 refe.AppendChild(id);
                 refe.AppendChild(type);
                 refe.AppendChild(auth);
                 refe.AppendChild(year);
+                refe.AppendChild(edi);
                 refe.AppendChild(name);
+                refe.AppendChild(sname);
+                refe.AppendChild(pgnum);
+                refe.AppendChild(vol);
                 refe.AppendChild(city);
                 refe.AppendChild(pub);
+                refe.AppendChild(date);
+                refe.AppendChild(url);
                 if (textBoxTag.Text != String.Empty){
                     tag.InnerText = textBoxTag.Text;
                     refe.AppendChild(tag);
@@ -179,6 +191,9 @@ namespace YazLab_1
                 pub.InnerText = textBoxVar4.Text;
                 sname.InnerText = textBoxVar5.Text;
                 pgnum.InnerText = textBoxPgNum.Text;
+                vol.InnerText = String.Empty;
+                date.InnerText = String.Empty;
+                url.InnerText = String.Empty;
                 refe.AppendChild(id);
                 refe.AppendChild(type);
                 refe.AppendChild(auth);
@@ -187,8 +202,11 @@ namespace YazLab_1
                 refe.AppendChild(name);
                 refe.AppendChild(sname);
                 refe.AppendChild(pgnum);
+                refe.AppendChild(vol);
                 refe.AppendChild(city);
                 refe.AppendChild(pub);
+                refe.AppendChild(date);
+                refe.AppendChild(url);
                 if (textBoxTag.Text != String.Empty){
                     tag.InnerText = textBoxTag.Text;
                     refe.AppendChild(tag);
@@ -213,13 +231,23 @@ namespace YazLab_1
                 sname.InnerText = textBoxVar3.Text;
                 vol.InnerText = textBoxVar2.Text;
                 pgnum.InnerText = textBoxPgNum.Text;
+                edi.InnerText = String.Empty;
+                city.InnerText = String.Empty;
+                pub.InnerText = String.Empty;
+                date.InnerText = String.Empty;
                 refe.AppendChild(id);
                 refe.AppendChild(type);
                 refe.AppendChild(auth);
                 refe.AppendChild(year);
+                refe.AppendChild(edi);
                 refe.AppendChild(name);
                 refe.AppendChild(sname);
                 refe.AppendChild(pgnum);
+                refe.AppendChild(vol);
+                refe.AppendChild(city);
+                refe.AppendChild(pub);
+                refe.AppendChild(date);
+                refe.AppendChild(url);
                 if (textBoxTag.Text != String.Empty){
                     url.InnerText = textBoxVar5.Text;
                     refe.AppendChild(url);
@@ -241,19 +269,29 @@ namespace YazLab_1
                 }
             else if (radioButtonNet.Checked)
             {
-                type.InnerText = "Internet Kaynagi";
+                type.InnerText = "Internet";
                 auth.InnerText = textBoxName.Text;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
                 date.InnerText = textBoxVar2.Text;
                 url.InnerText = textBoxVar3.Text;
+                edi.InnerText = String.Empty;
+                sname.InnerText = String.Empty;
+                city.InnerText = String.Empty;
+                pub.InnerText = String.Empty;
+                vol.InnerText = String.Empty;
                 refe.AppendChild(id);
                 refe.AppendChild(type);
                 refe.AppendChild(auth);
                 refe.AppendChild(year);
+                refe.AppendChild(edi);
                 refe.AppendChild(name);
-                refe.AppendChild(date);
+                refe.AppendChild(sname);
                 refe.AppendChild(pgnum);
+                refe.AppendChild(vol);
+                refe.AppendChild(city);
+                refe.AppendChild(pub);
+                refe.AppendChild(date);
                 refe.AppendChild(url);
                 
                 if (textBoxTag.Text != String.Empty){
