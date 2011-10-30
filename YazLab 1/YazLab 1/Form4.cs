@@ -22,6 +22,7 @@ namespace YazLab_1
         XmlDocument doc = new XmlDocument();
         XmlDocument sepet = new XmlDocument();
         XmlElement root;
+        XmlElement rootbas;
         XmlNodeList list;
         private const String PATH = (@"C:\resource.xml");
         private const String BPATH = (@"C:\basket.xml");
@@ -30,16 +31,34 @@ namespace YazLab_1
             InitializeComponent();
             if (!System.IO.File.Exists(PATH))
             {
-              MessageBox.Show("XML dosyası bulunamadı. Lütfen bir kaynak ekleyin", "Hata");
-              Form3 form3 = new Form3();
-              form3.Show();
+                MessageBox.Show("XML dosyası bulunamadı. Lütfen bir kaynak ekleyin", "Hata");
+                Form3 form3 = new Form3();
+                form3.Show();
+
+            }
+            else {
+                doc.Load(PATH);
             
+            }
+            if (!System.IO.File.Exists(BPATH))
+            {
+                XmlDeclaration dec = sepet.CreateXmlDeclaration("1.0", "UTF-8", "yes");
+                rootbas = sepet.CreateElement("Referanslar");
+                sepet.AppendChild(dec);
+                sepet.AppendChild(rootbas);
+                sepet.Save(BPATH);
+            }
+            else
+            {
+                sepet.Load(BPATH);
             }
         }
 
         private void Form4_Load(object sender, EventArgs e)
         {
             comboBoxType.DataSource = type;
+            root = doc.DocumentElement;
+            rootbas = sepet.DocumentElement;
         }
 
         private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
@@ -59,7 +78,6 @@ namespace YazLab_1
         private void button1_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-            doc.Load(PATH);
             listView1.Columns.Clear();
             if (comboBoxType.SelectedItem == "Genel")
                 temp = gen;
@@ -175,30 +193,28 @@ namespace YazLab_1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!System.IO.File.Exists(BPATH))
-            {
-                XmlDeclaration dec = sepet.CreateXmlDeclaration("1.0", "UTF-8", "yes");
-                root = sepet.CreateElement("Referanslar");
-                sepet.AppendChild(dec);
-                sepet.AppendChild(root);
-                sepet.Save(BPATH);
-            }
-            else
-            {
-                sepet.Load(BPATH);
-                root = sepet.DocumentElement;
+                rootbas = sepet.DocumentElement;
 
                 foreach (ListViewItem it in listView1.Items)
                 {
                     if (it.Checked)
                     {
-                        XmlNode add =  doc.SelectSingleNode("//Referans[ID = '"+listView1.Items[it.Index].SubItems[0].Text+ "']");
-                        XmlNode imp = sepet.ImportNode(add,true);
-                        root.AppendChild(imp);
-                        sepet.Save(BPATH);
+                        XmlNodeList test = sepet.SelectNodes("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                        if (test.Count == 0)
+                        {
+
+                            XmlNode add = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                            XmlNode imp = sepet.ImportNode(add, true);
+                            rootbas.AppendChild(imp);
+                            sepet.Save(BPATH);
+                        }
+                        else {
+                            MessageBox.Show("Eklemeye çalıştığınız referans sepette zaten mevcut","Hata");
+                        
+                        }
                     }
                 }
-            }
+                
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -237,5 +253,39 @@ namespace YazLab_1
                 listView1.Items.Add(item);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem it in listView1.Items)
+            {
+                if (it.Checked)
+                {
+                    XmlNode del = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                    XmlNodeList check = sepet.SelectNodes("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                    if (check.Count > 0) {
+                        rootbas.RemoveChild(check[0]);
+                        sepet.Save(BPATH);
+                    }
+                    root.RemoveChild(del);
+                    doc.Save(PATH);
+                }
+            }
+            button1_Click(sender, e);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem it in listView1.Items)
+            {
+                if (it.Checked)
+                {
+                    XmlNode del = sepet.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                    rootbas.RemoveChild(del);
+                    sepet.Save(PATH);
+                }
+            }
+            button4_Click(sender,e);
+        }
+
         }
     }
