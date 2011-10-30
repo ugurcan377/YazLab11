@@ -19,7 +19,7 @@ namespace YazLab_1
         private XmlDocument doc;
         private XmlElement root;
         private XmlElement user;
-        private const string PATH = @"C:\user.xml";
+        private const string PATH = @"C:\Program Files\Common Files\ROY\user.xml";
 
         private void buttonEnter_Click(object sender, EventArgs e)
         {
@@ -47,6 +47,12 @@ namespace YazLab_1
         private void Form1_Load(object sender, EventArgs e)
         {
             doc = new XmlDocument();
+            if (!System.IO.File.Exists(PATH))
+            {
+                MessageBox.Show("Kayıtlı Kullanıcı Bulunamadı Lütfen Yeni Kullanıcı Giriniz","Hata");
+                Form6 form6 = new Form6();
+                form6.Show();
+            }
             doc.Load(PATH);
             root = doc.DocumentElement;
             user = (XmlElement)root.FirstChild;

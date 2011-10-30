@@ -14,7 +14,7 @@ namespace YazLab_1
     public partial class Form3 : Form
     {
         private XmlDocument doc = new XmlDocument();
-        private const String PATH = @"C:\resource.xml";
+        private const String PATH = @"C:\Program Files\Common Files\ROY\resource.xml";
         String fileName;
         public Form3()
         {

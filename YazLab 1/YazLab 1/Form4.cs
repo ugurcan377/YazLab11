@@ -24,8 +24,8 @@ namespace YazLab_1
         XmlElement root;
         XmlElement rootbas;
         XmlNodeList list;
-        private const String PATH = (@"C:\resource.xml");
-        private const String BPATH = (@"C:\basket.xml");
+        private const String PATH = (@"C:\Program Files\Common Files\ROY\resource.xml");
+        private const String BPATH = (@"C:\Program Files\Common Files\ROY\basket.xml");
         public Form4()
         {
             InitializeComponent();
@@ -256,36 +256,42 @@ namespace YazLab_1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem it in listView1.Items)
+            if (MessageBox.Show("Silme islemini onaylıyor musunuz ?", "Onay Gerekli", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (it.Checked)
+                foreach (ListViewItem it in listView1.Items)
                 {
-                    XmlNode del = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
-                    XmlNodeList check = sepet.SelectNodes("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
-                    if (check.Count > 0) {
-                        rootbas.RemoveChild(check[0]);
-                        sepet.Save(BPATH);
+                    if (it.Checked)
+                    {
+                        XmlNode del = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                        XmlNodeList check = sepet.SelectNodes("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                        if (check.Count > 0)
+                        {
+                            rootbas.RemoveChild(check[0]);
+                            sepet.Save(BPATH);
+                        }
+                        root.RemoveChild(del);
+                        doc.Save(PATH);
                     }
-                    root.RemoveChild(del);
-                    doc.Save(PATH);
                 }
+                button1_Click(sender, e);
             }
-            button1_Click(sender, e);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem it in listView1.Items)
+            if (MessageBox.Show("Kaldırma islemini onaylıyor musunuz ?", "Onay Gerekli", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                if (it.Checked)
+                foreach (ListViewItem it in listView1.Items)
                 {
-                    XmlNode del = sepet.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
-                    rootbas.RemoveChild(del);
-                    sepet.Save(PATH);
+                    if (it.Checked)
+                    {
+                        XmlNode del = sepet.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                        rootbas.RemoveChild(del);
+                        sepet.Save(PATH);
+                    }
                 }
+                button4_Click(sender, e);
             }
-            button4_Click(sender,e);
         }
-
         }
     }

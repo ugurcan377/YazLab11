@@ -31,6 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.kaynakEkleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kaynakAraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kaynakçaOluşturToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kullanıcıAyarlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +40,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kaynakEkleToolStripMenuItem,
-            this.kaynakAraToolStripMenuItem});
+            this.kaynakAraToolStripMenuItem,
+            this.kaynakçaOluşturToolStripMenuItem,
+            this.kullanıcıAyarlarıToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
@@ -58,6 +62,19 @@
             this.kaynakAraToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.kaynakAraToolStripMenuItem.Text = "Kaynak Ara";
             this.kaynakAraToolStripMenuItem.Click += new System.EventHandler(this.kaynakAraToolStripMenuItem_Click);
+            // 
+            // kaynakçaOluşturToolStripMenuItem
+            // 
+            this.kaynakçaOluşturToolStripMenuItem.Name = "kaynakçaOluşturToolStripMenuItem";
+            this.kaynakçaOluşturToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
+            this.kaynakçaOluşturToolStripMenuItem.Text = "Kaynakça Oluştur";
+            // 
+            // kullanıcıAyarlarıToolStripMenuItem
+            // 
+            this.kullanıcıAyarlarıToolStripMenuItem.Name = "kullanıcıAyarlarıToolStripMenuItem";
+            this.kullanıcıAyarlarıToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.kullanıcıAyarlarıToolStripMenuItem.Text = "Kullanıcı Ayarları";
+            this.kullanıcıAyarlarıToolStripMenuItem.Click += new System.EventHandler(this.kullanıcıAyarlarıToolStripMenuItem_Click);
             // 
             // Form2
             // 
@@ -80,5 +97,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem kaynakEkleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kaynakAraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kaynakçaOluşturToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kullanıcıAyarlarıToolStripMenuItem;
     }
 }
