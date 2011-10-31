@@ -33,5 +33,11 @@ namespace YazLab_1
             Form5 form5 = new Form5();
             form5.Show();
         }
+
+        private void kaynakçaOluşturToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form8 form8 = new Form8();
+            form8.Show();
+        }
     }
 }

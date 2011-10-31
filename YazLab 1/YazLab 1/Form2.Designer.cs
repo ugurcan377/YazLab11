@@ -68,6 +68,7 @@
             this.kaynakçaOluşturToolStripMenuItem.Name = "kaynakçaOluşturToolStripMenuItem";
             this.kaynakçaOluşturToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
             this.kaynakçaOluşturToolStripMenuItem.Text = "Kaynakça Oluştur";
+            this.kaynakçaOluşturToolStripMenuItem.Click += new System.EventHandler(this.kaynakçaOluşturToolStripMenuItem_Click);
             // 
             // kullanıcıAyarlarıToolStripMenuItem
             // 
