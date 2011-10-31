@@ -25,10 +25,10 @@ namespace YazLab_1
         {
             if (textBoxUser.Text == user.GetElementsByTagName("Username")[0].InnerText && textBoxPass.Text == user.GetElementsByTagName("Password")[0].InnerText)
             {
-                this.Hide();
+                
                 Form2 form2 = new Form2();
                 form2.Show();
-               
+                this.Hide();
                
             }
             else
@@ -44,6 +44,7 @@ namespace YazLab_1
             textBoxPass.Text = String.Empty;
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             doc = new XmlDocument();
@@ -52,6 +53,7 @@ namespace YazLab_1
                 MessageBox.Show("Kayıtlı Kullanıcı Bulunamadı Lütfen Yeni Kullanıcı Giriniz","Hata");
                 Form6 form6 = new Form6();
                 form6.Show();
+                this.Hide();
             }
             doc.Load(PATH);
             root = doc.DocumentElement;

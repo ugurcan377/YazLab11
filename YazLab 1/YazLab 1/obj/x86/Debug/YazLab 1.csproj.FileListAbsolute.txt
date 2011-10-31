@@ -12,3 +12,4 @@ C:\Users\Ugurcan\YazLab11\YazLab 1\YazLab 1\obj\x86\Debug\YazLab_1.Form3.resourc
 C:\Users\Ugurcan\YazLab11\YazLab 1\YazLab 1\obj\x86\Debug\YazLab_1.Form4.resources
 C:\Users\Ugurcan\YazLab11\YazLab 1\YazLab 1\obj\x86\Debug\YazLab_1.Form5.resources
 C:\Users\Ugurcan\YazLab11\YazLab 1\YazLab 1\obj\x86\Debug\YazLab_1.Form6.resources
+C:\Users\Ugurcan\YazLab11\YazLab 1\YazLab 1\obj\x86\Debug\YazLab_1.Form7.resources

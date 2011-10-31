@@ -38,7 +38,7 @@ namespace YazLab_1
         {
             String username;
             username = user.GetElementsByTagName("Username")[0].InnerText;
-            listBox1.Items.Add(username);
+            textBox5.Text = username;
             
         }
     }

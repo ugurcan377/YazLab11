@@ -118,6 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(418, 244);
+            this.ControlBox = false;
             this.Controls.Add(this.textBoxPass1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonCancel);
@@ -128,7 +129,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form6";
             this.Text = "Kullanıcı Ekle";
-            this.Load += new System.EventHandler(this.Form6_Load);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 

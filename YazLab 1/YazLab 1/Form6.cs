@@ -19,16 +19,6 @@ namespace YazLab_1
         {
             InitializeComponent();
         }
-
-        private void Form6_Load(object sender, EventArgs e)
-        {
-            XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
-                                  root = doc.CreateElement("Users");
-            doc.AppendChild(declaration);
-            doc.AppendChild(root);
-            doc.Save(PATH);
-        }
-
         private void buttonEnter_Click(object sender, EventArgs e)
         {
             XmlElement fword = doc.CreateElement("User");
@@ -36,6 +26,11 @@ namespace YazLab_1
             XmlElement pass = doc.CreateElement("Password");
             if (textBoxUser.Text != String.Empty && textBoxPass.Text != String.Empty && textBoxPass.Text == textBoxPass1.Text)
             {
+                XmlDeclaration declaration = doc.CreateXmlDeclaration("1.0", "UTF-8", "yes");
+                root = doc.CreateElement("Users");
+                doc.AppendChild(declaration);
+                doc.AppendChild(root);
+                doc.Save(PATH);
                 username.InnerText = textBoxUser.Text;
                 pass.InnerText = textBoxPass.Text;
                 fword.AppendChild(username);
@@ -43,7 +38,9 @@ namespace YazLab_1
                 root.AppendChild(fword);
                 doc.Save(PATH);
                 MessageBox.Show("Kayıt Başarılı", "ROY");
-                this.Hide();
+                Form1 form1 = new Form1();
+                form1.Show();
+                this.Close();
             }
             else
             { MessageBox.Show("Kayıt Başarısız Lütfen Tekrar Deneyiniz","Hata");

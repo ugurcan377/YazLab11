@@ -14,6 +14,7 @@ namespace YazLab_1
     {
         String[] type = {"Genel","Kitap","Ed. Kitap","Dergi","Internet"};
         String[] gen = { "ID", "Tip", "Yazar", "Yil", "Editor","Baslik","KaynakAdi","SayfaNo","CiltNo","Sehir", "Yayinci", "Tarih", "Url", "Etiket", "Aciklama", "DosyaYolu" };
+        //                0      1       2       3        4        5         6           7       8        9         10       11       12      13        14            15
         String[] book = { "ID", "Tip", "Yazar", "Yil", "Baslik", "Sehir", "Yayinci", "Etiket", "Aciklama", "DosyaYolu" };
         String[] ebook = { "ID", "Tip", "Yazar", "Yil", "Baslik", "KaynakAdi", "SayfaNo","CiltNo", "Sehir", "Yayinci", "Etiket", "Aciklama", "DosyaYolu" };
         String[] mag = { "ID", "Tip", "Yazar", "Yil", "Baslik", "KaynakAdi","SayfaNo", "Url", "Etiket", "Aciklama","DosyaYolu" };
@@ -187,9 +188,21 @@ namespace YazLab_1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            foreach (ListViewItem it in listView1.Items)
+            {
+                if (it.Checked)
+                {
+                        XmlNode add = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                        Form7 form7 = new Form7(add.ChildNodes[0].InnerText);
+                        form7.Show();
+                        this.Close();
+                        break;
+                    }
 
-            
+                }
             }
+            
+            
 
         private void button3_Click(object sender, EventArgs e)
         {
