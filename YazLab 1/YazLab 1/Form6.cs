@@ -38,8 +38,8 @@ namespace YazLab_1
                 root.AppendChild(fword);
                 doc.Save(PATH);
                 MessageBox.Show("Kayıt Başarılı", "ROY");
-                Form1 form1 = new Form1();
-                form1.Show();
+                Form2 form2 = new Form2();
+                form2.Show();
                 this.Close();
             }
             else

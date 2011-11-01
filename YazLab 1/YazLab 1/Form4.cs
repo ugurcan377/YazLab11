@@ -20,6 +20,7 @@ namespace YazLab_1
         String[] mag = { "ID", "Tip", "Yazar", "Yil", "Baslik", "KaynakAdi","SayfaNo", "Url", "Etiket", "Aciklama","DosyaYolu" };
         String[] net = { "ID", "Tip", "Yazar", "Yil", "Baslik", "KaynakAdi", "Tarih", "Url", "Etiket", "Aciklama", "DosyaYolu" };
         String[] temp;
+        String[] search;
         XmlDocument doc = new XmlDocument();
         XmlDocument sepet = new XmlDocument();
         XmlElement root;
@@ -35,7 +36,6 @@ namespace YazLab_1
                 MessageBox.Show("XML dosyası bulunamadı. Lütfen bir kaynak ekleyin", "Hata");
                 Form3 form3 = new Form3();
                 form3.Show();
-
             }
             else {
                 doc.Load(PATH);
@@ -78,6 +78,7 @@ namespace YazLab_1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            String[] search = { textBoxSearch.Text};
             listView1.Clear();
             listView1.Columns.Clear();
             if (comboBoxType.SelectedItem == "Genel")
@@ -150,36 +151,45 @@ namespace YazLab_1
                     list = doc.DocumentElement.SelectNodes("//Referans[Tip='Dergi']");
                 if (comboBoxType.SelectedItem == "Internet")
                     list = doc.DocumentElement.SelectNodes("//Referans[Tip='Internet']");
-                foreach (XmlNode node in list)
+                if (textBoxSearch.Text.Contains(","))
                 {
-                    if (node.ChildNodes[comboBoxCategory.SelectedIndex].InnerText.Contains(textBoxSearch.Text))
+                  search = textBoxSearch.Text.Split(new char[] { ',' });
+                }
+                foreach (String text in search)
+                {
+                    foreach (XmlNode node in list)
                     {
-                    int i = 0;
-                    ListViewItem item = new ListViewItem();
-                    foreach (XmlNode nodee in node.ChildNodes)
-                    {
-                        if (nodee.InnerText != String.Empty)
+
+                        if (node.ChildNodes[comboBoxCategory.SelectedIndex].InnerText.Contains(text))
                         {
-                            if (i == 0)
+                            int i = 0;
+                            ListViewItem item = new ListViewItem();
+                            foreach (XmlNode nodee in node.ChildNodes)
                             {
-                                item.Text = nodee.InnerText;
-                                i++;
-                                continue;
+                                if (nodee.InnerText != String.Empty)
+                                {
+                                    if (i == 0)
+                                    {
+                                        item.Text = nodee.InnerText;
+                                        i++;
+                                        continue;
+                                    }
+                                    item.SubItems.Add(nodee.InnerText);
+
+                                }
+                                else
+                                {
+                                    if (comboBoxType.SelectedItem == "Genel")
+                                    {
+                                        item.SubItems.Add("");
+                                    }
+
+                                }
                             }
-                            item.SubItems.Add(nodee.InnerText);
-                            
-                        }
-                        else {
-                            if (comboBoxType.SelectedItem == "Genel")
-                            {
-                                item.SubItems.Add("");
-                            }
-                            
+                            listView1.Items.Add(item);
                         }
                     }
-                    listView1.Items.Add(item); }
                 }
-
             
             
             
@@ -300,10 +310,27 @@ namespace YazLab_1
                     {
                         XmlNode del = sepet.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
                         rootbas.RemoveChild(del);
-                        sepet.Save(PATH);
+                        sepet.Save(BPATH);
                     }
                 }
                 button4_Click(sender, e);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem it in listView1.Items)
+            {
+                if (it.Checked)
+                {
+                    XmlNode add = doc.SelectSingleNode("//Referans[ID = '" + listView1.Items[it.Index].SubItems[0].Text + "']");
+                    if (add.ChildNodes[15].InnerText != String.Empty)
+                    {
+                        webBrowser1.Navigate(@add.ChildNodes[15].InnerText);
+                        break;
+                    }
+                }
+
             }
         }
         }

@@ -313,15 +313,16 @@
             this.buttonCancel.TabIndex = 30;
             this.buttonCancel.Text = "İptal";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.Clear);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 373);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(413, 13);
+            this.label2.Size = new System.Drawing.Size(410, 13);
             this.label2.TabIndex = 31;
-            this.label2.Text = "Not : * ile işaretlenmiş alanlar isteğe bağlıdır.  Çoklu isim girişi için + karek" +
+            this.label2.Text = "Not : * ile işaretlenmiş alanlar isteğe bağlıdır.  Çoklu isim girişi için ; karek" +
                 "terini kullanınız";
             // 
             // labelPath

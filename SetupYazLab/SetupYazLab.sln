@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupYazLab", "SetupYazLab\SetupYazLab.vdproj", "{DBF1BCC7-6624-47E3-9D9D-95AEE3D7B700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazLab 1", "..\YazLab 1\YazLab 1\YazLab 1.csproj", "{90DF5452-60DC-4E39-9F43-E31E792CB7B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBF1BCC7-6624-47E3-9D9D-95AEE3D7B700}.Debug|x86.ActiveCfg = Debug
+		{DBF1BCC7-6624-47E3-9D9D-95AEE3D7B700}.Debug|x86.Build.0 = Debug
+		{DBF1BCC7-6624-47E3-9D9D-95AEE3D7B700}.Release|x86.ActiveCfg = Release
+		{DBF1BCC7-6624-47E3-9D9D-95AEE3D7B700}.Release|x86.Build.0 = Release
+		{90DF5452-60DC-4E39-9F43-E31E792CB7B8}.Debug|x86.ActiveCfg = Debug|x86
+		{90DF5452-60DC-4E39-9F43-E31E792CB7B8}.Debug|x86.Build.0 = Debug|x86
+		{90DF5452-60DC-4E39-9F43-E31E792CB7B8}.Release|x86.ActiveCfg = Release|x86
+		{90DF5452-60DC-4E39-9F43-E31E792CB7B8}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

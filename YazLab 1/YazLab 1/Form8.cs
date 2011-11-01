@@ -69,11 +69,16 @@ namespace YazLab_1
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
+
                 filename = saveFileDialog1.FileName;
                 textBox1.Text = filename;
+                htmlout();
+                webBrowser1.Navigate(filename + ".html");
             }
-            htmlout();
-            webBrowser1.Navigate(filename+".html");
+            else {
+                this.Close();
+            }
+
         }
 
         private void htmlout()
@@ -93,8 +98,15 @@ namespace YazLab_1
                 }
                 if (node.ChildNodes[1].InnerText == "Ed.Kitap")
                 {
+                    String edtest;
+                    if (node.ChildNodes[4].InnerText.Contains("&")){
+                        edtest="(Eds.), <i>";
+                    }
+                    else{
+                        edtest="(Ed.), <i>";
+                    }
                     sb.AppendLine("<p>" + node.ChildNodes[2].InnerText + " (" + node.ChildNodes[3].InnerText + "). " + node.ChildNodes[5].InnerText + ",In "+
-                    node.ChildNodes[4]+ "(Ed.), <i>" + node.ChildNodes[6].InnerText +",</i>(pp. "+node.ChildNodes[7].InnerText +"),"+ node.ChildNodes[9].InnerText +
+                    node.ChildNodes[4].InnerText+ edtest + node.ChildNodes[6].InnerText +",</i>(pp. "+node.ChildNodes[7].InnerText +"),"+ node.ChildNodes[9].InnerText +
                     "," + node.ChildNodes[10].InnerText + "." + "</p>");
                 
                 }
@@ -119,13 +131,5 @@ namespace YazLab_1
             
         }
     
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                filename = saveFileDialog1.FileName;
-                textBox1.Text = filename;
-            }
-        }
     }
 }

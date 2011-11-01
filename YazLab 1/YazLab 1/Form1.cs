@@ -54,6 +54,7 @@ namespace YazLab_1
                 Form6 form6 = new Form6();
                 form6.Show();
                 this.Hide();
+                
             }
             doc.Load(PATH);
             root = doc.DocumentElement;

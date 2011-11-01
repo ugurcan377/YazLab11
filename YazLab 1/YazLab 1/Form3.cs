@@ -16,6 +16,9 @@ namespace YazLab_1
         private XmlDocument doc = new XmlDocument();
         private const String PATH = @"C:\Program Files\Common Files\ROY\resource.xml";
         String fileName;
+        String[] trans;
+        String author;
+        String editor;
         public Form3()
         {
             InitializeComponent();
@@ -95,9 +98,9 @@ namespace YazLab_1
             labelVar4.Hide();
             label14.Show();
             labelVar1.Text = "Makale Adı:";
-            labelVar2.Text = "Cilt No";
-            labelVar3.Text = "Dergi Adı";
-            labelVar5.Text = "Url";
+            labelVar2.Text = "Cilt No:";
+            labelVar3.Text = "Dergi Adı:";
+            labelVar5.Text = "Doi:";
         }
 
         private void radioButtonNet_CheckedChanged(object sender, EventArgs e)
@@ -111,8 +114,8 @@ namespace YazLab_1
             textBoxVar5.Hide();
             textBoxPgNum.Hide();
             labelVar1.Text = "Makale Adı:";
-            labelVar2.Text = "Tarih";
-            labelVar3.Text = "Url";
+            labelVar2.Text = "Tarih:";
+            labelVar3.Text = "Url:";
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -136,11 +139,29 @@ namespace YazLab_1
             XmlElement rfile = doc.CreateElement("DosyaYolu");
             XmlElement tag = doc.CreateElement("Etiket");
             XmlElement desc = doc.CreateElement("Aciklama");
-            id.InnerText= (root.GetElementsByTagName("Referans").Count+1).ToString();
+            String genid= (root.GetElementsByTagName("Referans").Count+1).ToString();
+            id.InnerText = genid;
+            if (textBoxName.Text.Contains(";"))
+            {
+                trans = textBoxName.Text.Split(new char[] {';'});
+                for (int i = 0; i < trans.Length; i++) {
+                    if (i == trans.Length-1){
+                        author += "&" + trans[i];
+                    }
+                    else{
+                        author += trans[i]+",";
+                    }
+                }
+            }
+            else
+            {
+                author = textBoxName.Text;
+            }
+
             if (radioButtonBook.Checked)
             {
                 type.InnerText = "Kitap";
-                auth.InnerText = textBoxName.Text;
+                auth.InnerText = author;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
                 city.InnerText = textBoxVar2.Text;
@@ -172,22 +193,48 @@ namespace YazLab_1
                     desc.InnerText = textBoxDesc.Text;
                     refe.AppendChild(desc);
                 }
-                if (fileName != String.Empty){
-                    rfile.InnerText = fileName;
+                if (fileName != null){
+                    String back = System.IO.Path.GetDirectoryName(fileName);
+                    String backup = System.IO.Path.GetFileName(fileName);
+                    String test = System.IO.Path.GetExtension(fileName);
+                    System.IO.File.Copy(fileName, back + backup + "(1)" + test, true);
+                    System.IO.File.Move(fileName, @"C:\Program Files\Common Files\ROY\Files\" + genid + test);
+                    rfile.InnerText = @"C:\Program Files\Common Files\ROY\Files\" + genid + test;
                     refe.AppendChild(rfile);
                 }
                     root.AppendChild(refe);
                     doc.Save(PATH);
+                    MessageBox.Show("Kaynak Ekleme Basarili","Nicee");
+                    Clear(sender, e);
             
             }
             else if (radioButtonEbook.Checked)
             {
+                if (textBoxName.Text.Contains(";"))
+                {
+                    trans = textBoxVar3.Text.Split(new char[] { ';' });
+                    for (int i = 0; i < trans.Length; i++)
+                    {
+                        if (i == trans.Length - 1)
+                        {
+                            editor += "&" + trans[i];
+                        }
+                        else
+                        {
+                            editor += trans[i] + ",";
+                        }
+                    }
+                }
+                else
+                {
+                    editor = textBoxVar3.Text;
+                }
                 type.InnerText = "Ed. Kitap";
-                auth.InnerText = textBoxName.Text;
+                auth.InnerText = author;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
                 city.InnerText = textBoxVar2.Text;
-                edi.InnerText = textBoxVar3.Text;
+                edi.InnerText = editor;
                 pub.InnerText = textBoxVar4.Text;
                 sname.InnerText = textBoxVar5.Text;
                 pgnum.InnerText = textBoxPgNum.Text;
@@ -215,17 +262,24 @@ namespace YazLab_1
                     desc.InnerText = textBoxDesc.Text;
                     refe.AppendChild(desc);
                 }
-                if (fileName != String.Empty){
-                    rfile.InnerText = fileName;
+                if (fileName != null){
+                    String back = System.IO.Path.GetDirectoryName(fileName);
+                    String backup = System.IO.Path.GetFileName(fileName);
+                    String test = System.IO.Path.GetExtension(fileName);
+                    System.IO.File.Copy(fileName,back+backup+"(1)"+test , true);
+                    System.IO.File.Move(fileName, @"C:\Program Files\Common Files\ROY\Files\" + genid + test);
+                    rfile.InnerText = @"C:\Program Files\Common Files\ROY\Files\" +genid + test;
                     refe.AppendChild(rfile);
                 }
                 root.AppendChild(refe);
                 doc.Save(PATH);
+                MessageBox.Show("Kaynak Ekleme Basarili", "Nicee");
+                Clear(sender, e);
             }
             else if (radioButtonMagazine.Checked)
             {
                 type.InnerText = "Dergi";
-                auth.InnerText = textBoxName.Text;
+                auth.InnerText = author;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
                 sname.InnerText = textBoxVar3.Text;
@@ -247,9 +301,13 @@ namespace YazLab_1
                 refe.AppendChild(city);
                 refe.AppendChild(pub);
                 refe.AppendChild(date);
-                refe.AppendChild(url);
-                if (textBoxTag.Text != String.Empty){
+                if (textBoxTag.Text != String.Empty)
+                {
                     url.InnerText = textBoxVar5.Text;
+                    refe.AppendChild(url);
+                }
+                else {
+                    url.InnerText = String.Empty;
                     refe.AppendChild(url);
                 }
                 if (textBoxTag.Text != String.Empty){
@@ -260,17 +318,24 @@ namespace YazLab_1
                     desc.InnerText = textBoxDesc.Text;
                     refe.AppendChild(desc);
                 }
-                if (fileName != String.Empty){
-                    rfile.InnerText = fileName;
+                if (fileName != null){
+                    String back = System.IO.Path.GetDirectoryName(fileName);
+                    String backup = System.IO.Path.GetFileName(fileName);
+                    String test = System.IO.Path.GetExtension(fileName);
+                    System.IO.File.Copy(fileName, back + backup + "(1)" + test, true);
+                    System.IO.File.Move(fileName, @"C:\Program Files\Common Files\ROY\Files\" + genid + test);
+                    rfile.InnerText = @"C:\Program Files\Common Files\ROY\Files\" + genid + test;
                     refe.AppendChild(rfile);
                 }
                 root.AppendChild(refe);
                 doc.Save(PATH);
+                MessageBox.Show("Kaynak Ekleme Basarili", "Nicee");
+                Clear(sender, e);
                 }
             else if (radioButtonNet.Checked)
             {
                 type.InnerText = "Internet";
-                auth.InnerText = textBoxName.Text;
+                auth.InnerText = author;
                 year.InnerText = textBoxYear.Text;
                 name.InnerText = textBoxVar1.Text;
                 date.InnerText = textBoxVar2.Text;
@@ -302,12 +367,19 @@ namespace YazLab_1
                     desc.InnerText = textBoxDesc.Text;
                     refe.AppendChild(desc);
                 }
-                if (fileName != String.Empty){
-                    rfile.InnerText = fileName;
+                if (fileName != null){
+                    String back = System.IO.Path.GetDirectoryName(fileName);
+                    String backup = System.IO.Path.GetFileName(fileName);
+                    String test = System.IO.Path.GetExtension(fileName);
+                    System.IO.File.Copy(fileName, back + backup + "(1)" + test, true);
+                    System.IO.File.Move(fileName, @"C:\Program Files\Common Files\ROY\Files\" + genid + test);
+                    rfile.InnerText = @"C:\Program Files\Common Files\ROY\Files\" + genid + test;
                     refe.AppendChild(rfile);
                 }
                 root.AppendChild(refe);
                 doc.Save(PATH);
+                MessageBox.Show("Kaynak Ekleme Basarili", "Nicee");
+                Clear(sender,e);
                     
             }
 
@@ -321,6 +393,20 @@ namespace YazLab_1
                 fileName = openFileDialog1.FileName;
                 textBoxPath.Text = fileName;
             }
+        }
+        private void Clear(object sender, EventArgs e) 
+        {
+            textBoxVar1.Text = String.Empty;
+            textBoxVar2.Text = String.Empty;
+            textBoxVar3.Text = String.Empty;
+            textBoxVar4.Text = String.Empty;
+            textBoxVar5.Text = String.Empty;
+            textBoxYear.Text = String.Empty;
+            textBoxTag.Text = String.Empty;
+            textBoxName.Text = String.Empty;
+            textBoxPath.Text = String.Empty;
+            textBoxPgNum.Text = String.Empty;
+            textBoxDesc.Text = String.Empty;
         }
 
 
