@@ -50,15 +50,18 @@ namespace YazLab_1
             doc = new XmlDocument();
             if (!System.IO.File.Exists(PATH))
             {
-                MessageBox.Show("Kayıtlı Kullanıcı Bulunamadı Lütfen Yeni Kullanıcı Giriniz","Hata");
+                MessageBox.Show("Kayıtlı Kullanıcı Bulunamadı Lütfen Yeni Kullanıcı Giriniz", "Hata");
                 Form6 form6 = new Form6();
                 form6.Show();
                 this.Hide();
-                
+
             }
-            doc.Load(PATH);
-            root = doc.DocumentElement;
-            user = (XmlElement)root.FirstChild;
+            else
+            {
+                doc.Load(PATH);
+                root = doc.DocumentElement;
+                user = (XmlElement)root.FirstChild;
+            }
         }
     }
 }
